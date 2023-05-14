@@ -1,6 +1,33 @@
 # gRPC Example Go
 
-Follow these setup to run the [quick start][] example:
+## Setup
+
+[grpc] https://grpc.io/docs/languages/go/quickstart
+
+[protobuf] https://protobuf.dev/
+
+1. Install protocol buffer compiler (version 3+)
+
+   ```console
+   $ brew install protobuf
+   $ protoc --version
+   libprotoc 3.21.12
+   ```
+
+2. Install the protocol compiler plugins for Go:
+
+   ```console
+   $ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+   $ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+   ```
+
+3. Update your PATH so that the protoc compiler can find the plugins:
+
+   ```console
+   $ export PATH="$PATH:$(go env GOPATH)/bin"
+   ```
+
+## Run Example
 
 1.  Generate gRPC code:
 
@@ -10,8 +37,15 @@ Follow these setup to run the [quick start][] example:
       message/message.proto
     ```
 
-For more details (including instructions for making a small change to the
-example code) or if you're having trouble running this example, see [Quick
-Start][].
+2.  Run the server:
 
-[quick start]: https://grpc.io/docs/languages/go/quickstart
+    ```console
+    $ go run grpc_server/main.go
+    ```
+
+3.  Run the client:
+
+    ```console
+    $ go run grpc_client/main.go --name=Test
+    Reply: Hello Test
+    ```
